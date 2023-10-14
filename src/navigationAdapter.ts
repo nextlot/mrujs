@@ -154,7 +154,11 @@ function navigate (element: HTMLElement, request: FetchRequestInterface, respons
   let location = expandUrl(window.location.href)
 
   if (request?.isGetRequest) location = request.url
-  if (response.redirected) location = response.location
+  
+  if (response.redirected) {
+    window.location = response.location
+    return
+  }
 
   const currentLocation = window.location.href
   const isSamePage = urlsAreEqual(location, currentLocation)
